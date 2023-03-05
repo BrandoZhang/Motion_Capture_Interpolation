@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     printf("  angle representation for interpolation:\n");
     printf("    e: Euler angles\n");
     printf("    q: quaternions\n");
-    printf("  N: number of skipped frames\n");
+    printf("  N: number of skipped frames, passing negative values for maximum possible number of skipped frames in random interpolation\n");
     printf("Example: %s skeleton.asf motion.amc l e 5 outputMotion.amc\n", argv[0]);  
     return -1;
   }
@@ -36,11 +36,11 @@ int main(int argc, char **argv)
   char * outputMotionCaptureFile = argv[6];
 
   int N = strtol(NString, NULL, 10);
-  if (N < 0)
-  {
-    printf("Error: invalid N value (%d).\n", N);
-    exit(1);
-  }
+//  if (N < 0)
+//  {
+//    printf("Error: invalid N value (%d).\n", N);
+//    exit(1);
+//  }
   printf("N=%d\n", N);
 
   Skeleton * pSkeleton = NULL;	// skeleton as read from an ASF file (input)

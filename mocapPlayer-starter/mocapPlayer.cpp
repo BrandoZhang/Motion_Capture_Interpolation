@@ -185,8 +185,8 @@ void cameraView(void)
 */
 void Redisplay() 
 {
-  /* clear image buffer to black */
-  glClearColor(1.0, 1.0, 1.0, 0);
+  /* clear image buffer to lavender */
+  glClearColor(0.715, 0.702, 0.780, 0);
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT); /* clear image, zbuf */
 
   glPushMatrix();  /* save current transform matrix */
@@ -208,7 +208,7 @@ void Redisplay()
     if (useFog == ON)
     {
       glEnable(GL_FOG);
-      GLfloat fogColor[4] = {1.0, 1.0, 1.0, 1.0};
+      GLfloat fogColor[4] = {0.715, 0.702, 0.780, 1.0};
       glFogfv(GL_FOG_COLOR, fogColor);
       glFogf(GL_FOG_START, (float)fogStart);
       glFogf(GL_FOG_END, (float)fogEnd);
@@ -753,26 +753,46 @@ void GraphicsInit()
   camera.atz = 0;
 
   // two white lights
-  GLfloat light_Ka[] = { 1.0, 1.0, 1.0, 1.0 };
-  GLfloat light_Kd[] = { 1.0, 1.0, 1.0, 1.0 };
-  GLfloat light_Ks[] = { 1.0, 1.0, 1.0, 1.0 };
+  GLfloat light_Ka[] = { 1.0, 1.0, 1.0, 0.3 };
+  GLfloat light_Kd[] = { 1.0, 1.0, 1.0, 0.3 };
+  GLfloat light_Ks[] = { 1.0, 1.0, 1.0, 0.3 };
   GLfloat light0_pos[] = { 0.0, groundPlaneLightHeight, 0.0, 0.0 };
   // GLfloat light0_pos[] = { -50.0, 50.0, 30.0, 0.0 };
-  GLfloat light1_pos[] = {  1.0, -1.0, 0.0, 0.0 };
+  // GLfloat light1_pos[] = {  1.0, -1.0, 0.0, 0.0 };
+
+  // blue light
+  GLfloat light1_Ka[] = { 0.251, 0.376, 0.855, 0.5 };
+  GLfloat light1_Kd[] = { 0.251, 0.376, 0.855, 0.5 };
+  GLfloat light1_Ks[] = { 0.251, 0.376, 0.855, 0.5 };
+  GLfloat light1_pos[] = { 1.0, -20.0, 30.0, 0.0 };
+
+  // pink light
+  GLfloat light2_Ka[] = { 0.992, 0.416, 0.898, 0.2 };
+  GLfloat light2_Kd[] = { 0.992, 0.416, 0.898, 0.2 };
+  GLfloat light2_Ks[] = { 0.992, 0.416, 0.898, 0.2 };
+  GLfloat light2_pos[] = { 1.0, -1.0, 0.0, 0.0 };
 
   // lights
+  // white
   glLightfv(GL_LIGHT0, GL_AMBIENT,  light_Ka);
   glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_Kd);
   glLightfv(GL_LIGHT0, GL_SPECULAR, light_Ks);
   glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
-
-  glLightfv(GL_LIGHT1, GL_AMBIENT,  light_Ka);
-  glLightfv(GL_LIGHT1, GL_DIFFUSE,  light_Kd);
-  glLightfv(GL_LIGHT1, GL_SPECULAR, light_Ks);
+  // blue
+  glLightfv(GL_LIGHT1, GL_AMBIENT,  light1_Ka);
+  glLightfv(GL_LIGHT1, GL_DIFFUSE,  light1_Kd);
+  glLightfv(GL_LIGHT1, GL_SPECULAR, light1_Ks);
   glLightfv(GL_LIGHT1, GL_POSITION, light1_pos);
+  // pink
+  glLightfv(GL_LIGHT2, GL_AMBIENT, light2_Ka);
+  glLightfv(GL_LIGHT2, GL_DIFFUSE, light2_Kd);
+  glLightfv(GL_LIGHT2, GL_SPECULAR, light2_Ks);
+  glLightfv(GL_LIGHT2, GL_POSITION, light2_pos);
+
 
   glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
+  glEnable(GL_LIGHT2);
   glEnable(GL_NORMALIZE);
   glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, true);
 
@@ -789,12 +809,12 @@ void GraphicsInit()
   glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
 
   //&groundPlaneHeight, &groundPlaneLightHeight, &groundPlaneSize, &groundPlaneR, &groundPlaneG, &groundPlaneB, &groundPlaneAmbient, &groundPlaneDiffuse, &groundPlaneSpecular, &groundPlaneShininess;
-  // 0.0,180.0,150.0,r0.81,g0.81,b0.55,a0.1,d0.4,s0.1,sh120.0
+  // 0.0,180.0,150.0,r0.78,g0.80,b0.84,a0.1,d0.4,s0.1,sh120.0
   double groundPlaneHeight = 0.0;
   double groundPlaneSize = 200.0;
-  double groundPlaneR = 0.81;
-  double groundPlaneG = 0.81;
-  double groundPlaneB = 0.55;
+  double groundPlaneR = 0.78;
+  double groundPlaneG = 0.80;
+  double groundPlaneB = 0.84;
   double groundPlaneAmbient = 0.1;
   double groundPlaneDiffuse = 0.9;
   double groundPlaneSpecular = 0.1;

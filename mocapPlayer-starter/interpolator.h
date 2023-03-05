@@ -24,6 +24,15 @@ enum AngleRepresentation
   EULER = 0, QUATERNION = 1
 };
 
+// clamps a given value into range [low, high]
+template <typename T> T clamp(const T& value, const T& low, const T& high)
+{
+    return value < low ? low : (value > high ? high : value);
+}
+
+// linear interpolation
+vector lerp(double t, vector& start, vector& end);
+
 class Interpolator
 {
 public: 
@@ -59,6 +68,12 @@ protected:
   void BezierInterpolationEuler(Motion * pInputMotion, Motion * pOutputMotion, int N);
   void LinearInterpolationQuaternion(Motion * pInputMotion, Motion * pOutputMotion, int N);
   void BezierInterpolationQuaternion(Motion * pInputMotion, Motion * pOutputMotion, int N);
+
+  // interpolation on non-uniform keyframe intervals
+  void LinearInterpolationEulerRandom(Motion * pInputMotion, Motion * pOutputMotion, int N);
+  void BezierInterpolationEulerRandom(Motion * pInputMotion, Motion * pOutputMotion, int N);
+  void LinearInterpolationQuaternionRandom(Motion * pInputMotion, Motion * pOutputMotion, int N);
+  void BezierInterpolationQuaternionRandom(Motion * pInputMotion, Motion * pOutputMotion, int N);
 
   // Bezier spline evaluation
   vector DeCasteljauEuler(double t, vector p0, vector p1, vector p2, vector p3); // evaluate Bezier spline at t, using DeCasteljau construction, vector version
